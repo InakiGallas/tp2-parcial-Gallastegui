@@ -1,5 +1,5 @@
 {
-  "name": "ejemplos-parciales-tp2-2025",
+  "name": "tp2-parcial-gallastegui",            
   "version": "1.0.0",
   "main": "src/index.js",
   "type": "module",
@@ -10,16 +10,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deborolon/ejemplos-parciales-tp2-2025.git"
+    "url": "git+https://github.com/InakiGallas/tp2-parcial-Gallastegui.git"
   },
-  "keywords": ["node.js, express, mvc"],
-  "author": "Debo Rolon",
+  "keywords": ["node.js", "express", "mvc", "tp2"],
+  "author": "Iñaki Gallastegui",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/deborolon/ejemplos-parciales-tp2-2025/issues"
+    "url": "https://github.com/InakiGallas/tp2-parcial-Gallastegui/issues"
   },
-  "homepage": "https://github.com/deborolon/ejemplos-parciales-tp2-2025#readme",
-  "description": "",
+  "homepage": "https://github.com/InakiGallas/tp2-parcial-Gallastegui#readme",
+  "description": "Proyecto base para el TP2 de la facultad.",
   "dependencies": {
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
