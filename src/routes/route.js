@@ -1,19 +1,19 @@
-import PalabrasController from "../controllers/controller.js";
+import FacturasController from "../controllers/controller.js";
 import express from "express";
-
 
 class Router {
     constructor() {
         this.router = express.Router();
-        this.palabrasController = new PalabrasController();
+        this.facturasController = new FacturasController();
     }
 
     startRoutes() {
-        //this.router.get("/palabras",this.palabrasController.getPalabras.bind(this.palabrasController)); Es una forma de asegurar que el contexto de `this` se mantenga dentro del método.
-        this.router.get("/palabras",this.palabrasController.getPalabras);
-        this.router.post("/palabras", this.palabrasController.postPalabra);
-        this.router.patch("/palabras/:id", this.palabrasController.patchPalabra);
+        this.router.get("/facturas", this.facturasController.getFacturas);
+        this.router.post("/facturas", this.facturasController.crearFactura);
+        this.router.get("/facturas/tipo/:tipo", this.facturasController.getPorTipo);
+        this.router.get("/facturas/estado/:estado", this.facturasController.getPorEstado);
         return this.router;
+    }
 }
-}
+
 export default Router;

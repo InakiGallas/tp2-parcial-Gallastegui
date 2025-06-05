@@ -1,30 +1,29 @@
-class PalabrasModel {
+class FacturasModel {
     constructor() {
-        this.palabras = [
-            { id: 1, palabra: 'hola'},
-            { id: 2, palabra: 'que'},
-            { id: 3, palabra: 'tal'},
-        ]
+        this.facturas = [
+            { id: 1, numero: 10, tipo: 'A', monto: 1000, estado: 'pendiente de pago' },
+            { id: 2, numero: 11, tipo: 'B', monto: 1500, estado: 'pagado' },
+            { id: 3, numero: 12, tipo: 'A', monto: 2000, estado: 'próximo a vencer' }
+        ];
     }
 
-        getPalabras = async () => {
-            return this.palabras;
-        };
+    getFacturas = async () => {
+        return this.facturas;
+    };
 
-        postPalabra = async (newPalabra) => {
-            newPalabra.id = this.palabras.length ? this.palabras[this.palabras.length - 1].id + 1 : 1;
-            this.palabras.push(newPalabra);
-            return newPalabra;
-        }
+    crearFactura = async (nuevaFactura) => {
+        nuevaFactura.id = this.facturas.length ? this.facturas[this.facturas.length - 1].id + 1 : 1;
+        this.facturas.push(nuevaFactura);
+        return nuevaFactura;
+    };
 
-        patchPalabra = async (id, updatedPalabra) => {
-            const index = this.palabras.findIndex(p => p.id == id);
-            if (index != -1) {
-                this.palabras[index] = { ...this.palabras[index], ...updatedPalabra };
-                return this.palabras[index];
-            }
-            return "Error: el indice no existe";
-        }
+    getFacturasPorTipo = async (tipo) => {
+        return this.facturas.filter(f => f.tipo === tipo);
+    };
+
+    getFacturasPorEstado = async (estado) => {
+        return this.facturas.filter(f => f.estado === estado);
+    };
 }
 
-export default PalabrasModel;
+export default FacturasModel;

@@ -1,44 +1,57 @@
-import PalabrasService from "../services/service.js";
-class PalabrasController {
+import FacturasService from "../services/service.js";
+import facturaSchema from "../validations/factura.js";
+
+class FacturasController {
     constructor() {
-        this.palabrasService = new PalabrasService();
+        this.facturasService = new FacturasService();
     }
 
-     getPalabras = async (req, res) => {
-         try {
-                const palabras = await this.palabrasService.getPalabras();
-                //console.log("Palabras:", palabras);
-                res.status(200).json(palabras);
-            } catch (error) {
-                res.status(500).json({ error: "Error fetching palabras" });
-            }
-     };
+    getFacturas = async (req, res) => {
+        try {
+            const facturas = await this.facturasService.getFacturas();
+            res.status(200).json(facturas);
+        } catch (error) {
+            res.status(500).json({ error: "Error fetching facturas" });
+        }
+    };
 
-     postPalabra = async (req, res) => {
-         try {
-             const newPalabra = req.body;
-             if (!newPalabra || !newPalabra.palabra) {
-                 return res.status(400).json({ error: "Palabra is required" });
-             }
-             const createdPalabra = await this.palabrasService.postPalabra(newPalabra);
-             res.status(201).json(createdPalabra);
-         } catch (error) {
-             res.status(500).json({ error: "Error creating palabra" });
-         }
-     };
+    crearFactura = async (req, res) => {
+        try {
+            const nuevaFactura = req.body;
 
-     patchPalabra = async (req, res) => {
-            try {
-                const { id } = req.params;
-                const updatedPalabra = req.body;
-                if (!updatedPalabra || !updatedPalabra.palabra) {
-                    return res.status(400).json({ error: "Palabra is required" });
-                }
-                const result = await this.palabrasService.patchPalabra(id, updatedPalabra);                
-                res.status(200).json(result);
-            } catch (error) {
-                res.status(500).json({ error: "Error updating palabra" });
+            const { error } = facturaSchema.validate(nuevaFactura);
+            if (error) {
+                return res.status(400).json({ error: error.details[0].message });
             }
-     }
+
+            const facturaCreada = await this.facturasService.crearFactura(nuevaFactura);
+            res.status(201).json(facturaCreada);
+            
+        } catch (error) {
+            res.status(500).json({ error: "Error creando factura" });
+        }
+    };
+
+
+    getPorTipo = async (req, res) => {
+        try {
+            const { tipo } = req.params;
+            const facturas = await this.facturasService.getFacturasPorTipo(tipo);
+            res.status(200).json(facturas);
+        } catch (error) {
+            res.status(500).json({ error: "Error filtrando por tipo" });
+        }
+    };
+
+    getPorEstado = async (req, res) => {
+        try {
+            const { estado } = req.params;
+            const facturas = await this.facturasService.getFacturasPorEstado(estado);
+            res.status(200).json(facturas);
+        } catch (error) {
+            res.status(500).json({ error: "Error filtrando por estado" });
+        }
+    };
 }
-export default PalabrasController;
+
+export default FacturasController;

@@ -1,15 +1,15 @@
-import Model from "./DAO/model.js";
+import FacturasModel from "./DAO/model.js";
 
 class Factory {
     static create(persistence) {
         switch (persistence) {
             case "memory":
-                console.log("memory persistence");
-                return new Model();
-            
+                console.log("Usando persistencia en memoria");
+                return new FacturasModel();
+
             default:
-                console.log("default persistence");
-                return new Model();
+                console.log("Persistencia por defecto (memoria)");
+                return new FacturasModel();
         }
     }
 }

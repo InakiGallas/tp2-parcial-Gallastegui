@@ -1,19 +1,25 @@
 import Factory from "../models/Factory.js";
-class PalabrasService {
+
+class FacturasService {
     constructor() {
-        this.palabrasModel = Factory.create(process.env.PERSISTENCE);
+        this.facturasModel = Factory.create(process.env.PERSISTENCE);
     }
 
-    getPalabras = async () => {
-         return await this.palabrasModel.getPalabras();
+    getFacturas = async () => {
+        return await this.facturasModel.getFacturas();
     };
 
-    postPalabra = async (newPalabra) => {
-        return await this.palabrasModel.postPalabra(newPalabra);
+    crearFactura = async (nuevaFactura) => {
+        return await this.facturasModel.crearFactura(nuevaFactura);
     };
 
-    patchPalabra = async (id, updatedPalabra) => {
-        return await this.palabrasModel.patchPalabra(id, updatedPalabra);
+    getFacturasPorTipo = async (tipo) => {
+        return await this.facturasModel.getFacturasPorTipo(tipo);
+    };
+
+    getFacturasPorEstado = async (estado) => {
+        return await this.facturasModel.getFacturasPorEstado(estado);
     };
 }
-export default PalabrasService;
+
+export default FacturasService;
